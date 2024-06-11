@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../../utils/appcolors.dart';
+import '../utils/appcolors.dart';
 
 class CategoryCardWidget extends StatelessWidget {
   const CategoryCardWidget({
-    super.key, required this.categoryCardTitle,
+    super.key,
+    required this.categoryCardTitle,
   });
+
   final String categoryCardTitle;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,7 +40,7 @@ class CategoryCardWidget extends StatelessWidget {
               color: primaryColor,
               letterSpacing: 0.6,
             ),
-          )
+          ),
         ],
       ),
     );

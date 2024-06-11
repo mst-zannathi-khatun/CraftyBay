@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/homewidgets/appbar_iconbutton_widget.dart';
-import '../../widgets/homewidgets/category_card_widget.dart';
+import '../../widgets/category_card_widget.dart';
 import '../../widgets/homewidgets/home_carouselslider_widget.dart';
 import '../../widgets/homewidgets/remarks_title_widget.dart';
 import '../../widgets/homewidgets/search_textfield_widget.dart';
+import '../../widgets/product_cart_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,46 +41,102 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            const SearchTextFieldWidget(),
-            const SizedBox(
-              height: 16,
-            ),
-            HomeCarouselSliderWidget(),
-            const SizedBox(
-              height: 8,
-            ),
-            RemarksTitleWidget(
-              remarkTitleText: "Categories",
-              onTap: () {},
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  CategoryCardWidget(
-                    categoryCardTitle: "Electronic",
-                  ),
-                  CategoryCardWidget(
-                    categoryCardTitle: "Food",
-                  ),
-                  CategoryCardWidget(
-                    categoryCardTitle: "Fashion",
-                  ),
-                  CategoryCardWidget(
-                    categoryCardTitle: "Furniture",
-                  ),
-                  CategoryCardWidget(
-                    categoryCardTitle: "Shoe",
-                  ),
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SearchTextFieldWidget(),
+              const SizedBox(
+                height: 16,
               ),
-            ),
-          ],
+              HomeCarouselSliderWidget(),
+              const SizedBox(
+                height: 8,
+              ),
+              RemarksTitleWidget(
+                remarkTitleText: "Categories",
+                onTap: () {},
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    CategoryCardWidget(
+                      categoryCardTitle: "Electronic",
+                    ),
+                    CategoryCardWidget(
+                      categoryCardTitle: "Food",
+                    ),
+                    CategoryCardWidget(
+                      categoryCardTitle: "Fashion",
+                    ),
+                    CategoryCardWidget(
+                      categoryCardTitle: "Furniture",
+                    ),
+                    CategoryCardWidget(
+                      categoryCardTitle: "Shoe",
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              RemarksTitleWidget(
+                remarkTitleText: "Popular",
+                onTap: () {},
+              ),
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              RemarksTitleWidget(
+                remarkTitleText: "Special",
+                onTap: () {},
+              ),
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              RemarksTitleWidget(
+                remarkTitleText: "New",
+                onTap: () {},
+              ),
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                    ProductCardWidget(),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
