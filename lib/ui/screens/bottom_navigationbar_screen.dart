@@ -9,6 +9,7 @@ import 'wishlist_screen.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({super.key});
+
   @override
   State<BottomNavigationBarScreen> createState() =>
       _BottomNavigationBarScreenState();

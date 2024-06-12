@@ -1,5 +1,7 @@
+import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import '../../widgets/homewidgets/appbar_iconbutton_widget.dart';
 import '../../widgets/category_card_widget.dart';
 import '../../widgets/homewidgets/home_carouselslider_widget.dart';
@@ -54,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               RemarksTitleWidget(
                 remarkTitleText: "Categories",
-                onTap: () {},
+                onTap: () {
+                  Get.find<BottomNavigationBarController>().changeIndex(1);
+                },
               ),
               const SizedBox(
                 height: 8,
