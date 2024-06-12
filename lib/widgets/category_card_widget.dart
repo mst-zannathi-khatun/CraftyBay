@@ -1,5 +1,4 @@
 import 'package:craftybay/ui/screens/product_list_screen.dart';
-import 'package:craftybay/widgets/product_cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/appcolors.dart';

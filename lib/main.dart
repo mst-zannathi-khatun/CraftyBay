@@ -1,4 +1,5 @@
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
+import 'package:craftybay/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'ui/screens/splash_screen.dart';
@@ -21,10 +22,16 @@ class CraftyBay extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(
-              color: Colors.white,
-              elevation: 1,
-              titleTextStyle: TextStyle(
-                color: Colors.black,
+            color: Colors.white,
+            elevation: 1,
+            titleTextStyle: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          elevatedButtonTheme:
+              ElevatedButtonThemeData(style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+                iconColor: Colors.white,
               ))),
     );
   }
