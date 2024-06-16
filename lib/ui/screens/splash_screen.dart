@@ -1,9 +1,9 @@
+import 'package:craftybay/ui/screens/email_address_verification_screen.dart';
 import 'package:craftybay/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
+import '../state_managers/auth_controller.dart';
 import 'bottom_navigationbar_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,7 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(
       seconds: 1,
     )).then((value) async {
-      Get.to(const BottomNavigationBarScreen());
+      final bool loginState = await Get.find<AuthController>().isLoggedIn();
+      if (loginState) {
+        Get.off(const BottomNavigationBarScreen());
+      } else {
+        Get.off(const EmailAddressVerificationScreen());
+      }
     });
   }
 
