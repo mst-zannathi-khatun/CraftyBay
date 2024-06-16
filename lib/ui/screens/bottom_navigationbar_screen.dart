@@ -1,7 +1,10 @@
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
+import 'package:craftybay/ui/state_managers/categorys_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/appcolors.dart';
+import '../state_managers/home_controller.dart';
+import '../state_managers/product_by_remark_controller.dart';
 import 'cart_screen.dart';
 import 'category_screen.dart';
 import 'home_screen.dart';
@@ -24,6 +27,14 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     CartScreen(),
     WishListScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    Get.find<HomeController>().getHomeSlider();
+    Get.find<CategoryController>().getCategory();
+    Get.find<PopularProductController>().getPopularProductsByRemark();
+  }
 
   int selectedIndex = 0;
 

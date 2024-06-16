@@ -1,3 +1,3 @@
 class Urls{
-  static String baseUrls = '';
+  static String baseUrls = 'https://craftybay.teamrabbil.com/api';
 }

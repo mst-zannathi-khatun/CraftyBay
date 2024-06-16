@@ -2,7 +2,6 @@ import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dar
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/product_cart_widget.dart';
 
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
@@ -30,7 +29,7 @@ class _WishListScreenState extends State<WishListScreen> {
         itemCount: 20,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 0.75),
         itemBuilder: (context, index) {
-          return const ProductCardWidget();
+          return Text("") ;//ProductCardWidget();
         },
       ),
     );

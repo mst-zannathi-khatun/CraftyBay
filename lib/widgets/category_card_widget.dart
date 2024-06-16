@@ -7,33 +7,35 @@ class CategoryCardWidget extends StatelessWidget {
   const CategoryCardWidget({
     super.key,
     required this.categoryCardTitle,
+    required this.imageUrl,
   });
 
-  final String categoryCardTitle;
+  final String categoryCardTitle, imageUrl;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         Get.to(const ProductListScreen());
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               decoration: BoxDecoration(
                 color: primaryColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(14),
-                child: Icon(
-                  Icons.computer,
-                  size: 40,
-                  color: primaryColor,
-                ),
-              ),
+              child: Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: Image.network(
+                    imageUrl,
+                    height: 40,
+                    width: 40,
+                    fit: BoxFit.scaleDown,
+                  )),
             ),
             const SizedBox(
               height: 4,
@@ -41,6 +43,7 @@ class CategoryCardWidget extends StatelessWidget {
             Text(
               categoryCardTitle,
               textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 color: primaryColor,

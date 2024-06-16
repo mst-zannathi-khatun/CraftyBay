@@ -1,3 +1,4 @@
+import 'package:craftybay/data/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../ui/screens/product_details_screen.dart';
@@ -5,8 +6,10 @@ import '../utils/appcolors.dart';
 
 class ProductCardWidget extends StatelessWidget {
   const ProductCardWidget({
-    super.key,
+    super.key, required this.product,
   });
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +27,17 @@ class ProductCardWidget extends StatelessWidget {
           shadowColor: primaryColor.withOpacity(0.3),
           child: Column(
             children: [
-              Image.asset(
-                'assets/images/demo_shoe.jpg',
+              Image.network(
+                product.image ?? '',
                 width: 140,
                 height: 85,
-                fit: BoxFit.cover,
+                fit: BoxFit.scaleDown,
               ),
               Padding(
                 padding: const EdgeInsets.all(4),
                 child: Column(
                   children: [
-                    Text("Nike Casual Shoe A1235",
+                    Text(product.title?? "Unknown",
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -44,9 +47,9 @@ class ProductCardWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          '\$340',
-                          style: TextStyle(
+                         Text(
+                          '\$${product.price}',
+                          style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: primaryColor,
@@ -55,17 +58,17 @@ class ProductCardWidget extends StatelessWidget {
                         const SizedBox(
                           width: 4,
                         ),
-                        const Wrap(
+                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.star,
                               color: Colors.amber,
                               size: 16,
                             ),
                             Text(
-                              "4.5",
-                              style: TextStyle(
+                              '\$${product.star ?? 0}',
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: softGreyColor,

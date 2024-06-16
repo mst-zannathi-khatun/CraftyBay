@@ -1,4 +1,9 @@
+import 'package:craftybay/ui/screens/email_address_verification_screen.dart';
+import 'package:craftybay/ui/state_managers/auth_controller.dart';
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
+import 'package:craftybay/ui/state_managers/categorys_controller.dart';
+import 'package:craftybay/ui/state_managers/home_controller.dart';
+import 'package:craftybay/ui/state_managers/product_by_remark_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -8,6 +13,7 @@ import '../../widgets/homewidgets/home_carouselslider_widget.dart';
 import '../../widgets/homewidgets/remarks_title_widget.dart';
 import '../../widgets/homewidgets/search_textfield_widget.dart';
 import '../../widgets/product_cart_widget.dart';
+import 'completed_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +35,15 @@ class _HomeScreenState extends State<HomeScreen> {
               const Spacer(),
               AppBarIconButton(
                 iconData: Icons.person,
-                onTap: () {},
+                onTap: () {
+                  Get.find<AuthController>().isLoggedIn().then((value) {
+                    if (value) {
+                      Get.to(const CompletedProfileScreen());
+                    } else {
+                      Get.to(const EmailAddressVerificationScreen());
+                    }
+                  });
+                },
               ),
               AppBarIconButton(
                 iconData: Icons.call,
@@ -50,7 +64,19 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              HomeCarouselSliderWidget(),
+              GetBuilder<HomeController>(builder: (homeController) {
+                if (homeController.getSliderInProgress) {
+                  return const SizedBox(
+                    height: 180,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return HomeCarouselSliderWidget(
+                  homeSlidersModel: homeController.homeSlidersModel,
+                );
+              }),
               const SizedBox(
                 height: 8,
               ),
@@ -63,28 +89,28 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 8,
               ),
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    CategoryCardWidget(
-                      categoryCardTitle: "Electronic",
+              GetBuilder<CategoryController>(builder: (categoryController) {
+                if (categoryController.getCategoryInProgress) {
+                  return const SizedBox(
+                    height: 90,
+                    child: Center(
+                      child: CircularProgressIndicator(),
                     ),
-                    CategoryCardWidget(
-                      categoryCardTitle: "Food",
-                    ),
-                    CategoryCardWidget(
-                      categoryCardTitle: "Fashion",
-                    ),
-                    CategoryCardWidget(
-                      categoryCardTitle: "Furniture",
-                    ),
-                    CategoryCardWidget(
-                      categoryCardTitle: "Shoe",
-                    ),
-                  ],
-                ),
-              ),
+                  );
+                }
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      children: categoryController.categoryModel.category!
+                          .map(
+                            (e) => CategoryCardWidget(
+                              categoryCardTitle: e.categoryName.toString(),
+                              imageUrl: e.categoryImg.toString(),
+                            ),
+                          )
+                          .toList()),
+                );
+              }),
               const SizedBox(
                 height: 16,
               ),
@@ -92,17 +118,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 remarkTitleText: "Popular",
                 onTap: () {},
               ),
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                  ],
-                ),
-              ),
+
+              ///
+              GetBuilder<PopularProductController>(
+                  builder: (productByRemarkController) {
+                if (productByRemarkController
+                    .getProductByRemarkModelInProgress) {
+                  return const SizedBox(
+                    height: 90,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      children:
+                          productByRemarkController.popularProduct.product!
+                              .map(
+                                (products) => ProductCardWidget(
+                                  product: products,
+                                ),
+                              )
+                              .toList()),
+                );
+              }),
               const SizedBox(
                 height: 16,
               ),
@@ -113,12 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: [
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                  ],
+                  children: [],
                 ),
               ),
               const SizedBox(
@@ -132,10 +168,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
-                    ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
+                    // ProductCardWidget(),
                   ],
                 ),
               )

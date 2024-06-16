@@ -1,4 +1,3 @@
-import 'package:craftybay/widgets/product_cart_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatelessWidget {
@@ -14,7 +13,7 @@ class ProductListScreen extends StatelessWidget {
         itemCount: 20,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 0.75),
         itemBuilder: (context, index) {
-          return const ProductCardWidget();
+          return Text(""); //ProductCardWidget();
         },
       ),
     );
