@@ -1,4 +1,6 @@
+import 'package:craftybay/ui/state_managers/auth_controller.dart';
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
+import 'package:craftybay/ui/state_managers/user_auth_controller.dart';
 import 'package:craftybay/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,11 +30,11 @@ class CraftyBay extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          elevatedButtonTheme:
-              ElevatedButtonThemeData(style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                iconColor: Colors.white,
-              ))),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            backgroundColor: primaryColor,
+            iconColor: Colors.white,
+          ))),
     );
   }
 }
@@ -41,5 +43,7 @@ class GetXBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(BottomNavigationBarController());
+    Get.put(UserAuthController());
+    Get.put(AuthController());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:craftybay/ui/screens/email_address_verification_screen.dart';
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,7 @@ import '../../widgets/homewidgets/home_carouselslider_widget.dart';
 import '../../widgets/homewidgets/remarks_title_widget.dart';
 import '../../widgets/homewidgets/search_textfield_widget.dart';
 import '../../widgets/product_cart_widget.dart';
+import 'completed_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,11 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
               const Spacer(),
               AppBarIconButton(
                 iconData: Icons.person,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const EmailAddressVerificationScreen());
+                },
               ),
               AppBarIconButton(
                 iconData: Icons.call,
-                onTap: () {},
+                onTap: () {
+                  Get.to(const CompletedProfileScreen());
+                },
               ),
               AppBarIconButton(
                 iconData: Icons.notifications,
