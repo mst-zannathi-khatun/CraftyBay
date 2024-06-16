@@ -7,19 +7,22 @@ class CommonTextFormFieldWidget extends StatelessWidget {
     required this.validator,
     required this.controller,
     this.hintText,
-    this.textInputType,
+    this.textInputType, this.maxLength, this.maxLines,
   });
 
   final Function(String?) validator;
   final TextEditingController controller;
   final String? hintText;
   final TextInputType? textInputType;
-
+  final int? maxLength;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       keyboardType: textInputType,
+      maxLength: maxLength,
+      maxLines: maxLines,
       validator: (value) {
         return validator(value);
       },
