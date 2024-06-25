@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:craftybay/ui/screens/home_screen.dart';
 import 'package:craftybay/ui/state_managers/user_auth_controller.dart';
 import 'package:craftybay/utils/appcolors.dart';
 import 'package:craftybay/widgets/common_elevatedbutton_widget.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../utils/style.dart';
-import '../state_managers/bottom_navigation_bar_controller.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
   final String email;
@@ -99,11 +99,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                             await userAuthController.otpVerification(
                                 widget.email, _otpETController.text);
                         if (response) {
-                          Get.find<BottomNavigationBarController>().backToHome();
+                          Get.offAll(const HomeScreen());
                         } else {
                           Get.showSnackbar(const GetSnackBar(
                             title: "Otp Verification Failed",
                             message: "check your opt again before enter",
+                            duration: Duration(seconds: 3),
                           ));
                         }
                       },

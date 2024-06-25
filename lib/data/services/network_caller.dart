@@ -12,7 +12,12 @@ class NetworkCaller {
 
   static Future<ResponseModel> getRequest({required String url}) async {
     try {
-      final http.Response response = await get(Uri.parse(Urls.baseUrls + url));
+      final http.Response response =
+          await get(Uri.parse(Urls.baseUrls + url), headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'token': AuthController.token.toString(),
+      });
       log(response.body);
       if (response.statusCode == 200) {
         return ResponseModel(

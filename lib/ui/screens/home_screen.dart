@@ -1,5 +1,7 @@
 import 'package:craftybay/ui/screens/email_address_verification_screen.dart';
+import 'package:craftybay/ui/state_managers/auth_controller.dart';
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
+import 'package:craftybay/ui/state_managers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -32,14 +34,18 @@ class _HomeScreenState extends State<HomeScreen> {
               AppBarIconButton(
                 iconData: Icons.person,
                 onTap: () {
-                  Get.to(const EmailAddressVerificationScreen());
+                  Get.find<AuthController>().isLoggedIn().then((value) {
+                    if (value) {
+                      Get.to(const CompletedProfileScreen());
+                    } else {
+                      Get.to(const EmailAddressVerificationScreen());
+                    }
+                  });
                 },
               ),
               AppBarIconButton(
                 iconData: Icons.call,
-                onTap: () {
-                  Get.to(const CompletedProfileScreen());
-                },
+                onTap: () {},
               ),
               AppBarIconButton(
                 iconData: Icons.notifications,
@@ -56,7 +62,19 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              HomeCarouselSliderWidget(),
+              GetBuilder<HomeController>(builder: (homeController) {
+                if (homeController.getSliderInProgress) {
+                  return const SizedBox(
+                    height: 180,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return HomeCarouselSliderWidget(
+                  homeSlidersModel: homeController.homeSlidersModel,
+                );
+              }),
               const SizedBox(
                 height: 8,
               ),
