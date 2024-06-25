@@ -108,6 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             (e) => CategoryCardWidget(
                               categoryCardTitle: e.categoryName.toString(),
                               imageUrl: e.categoryImg.toString(),
+                              id: e.id!,
                             ),
                           )
                           .toList()),

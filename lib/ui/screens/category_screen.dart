@@ -44,6 +44,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               return CategoryCardWidget(
                 categoryCardTitle: category.categoryName.toString(),
                 imageUrl: category.categoryImg.toString(),
+                id: category.id ?? 0,
               );
             },
           ),

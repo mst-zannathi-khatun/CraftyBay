@@ -7,16 +7,17 @@ class CategoryCardWidget extends StatelessWidget {
   const CategoryCardWidget({
     super.key,
     required this.categoryCardTitle,
-    required this.imageUrl,
+    required this.imageUrl, required this.id,
   });
 
   final String categoryCardTitle, imageUrl;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(const ProductListScreen());
+        Get.to(ProductListScreen(categoryId: id,));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
