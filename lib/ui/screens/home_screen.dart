@@ -3,7 +3,7 @@ import 'package:craftybay/ui/state_managers/auth_controller.dart';
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
 import 'package:craftybay/ui/state_managers/categorys_controller.dart';
 import 'package:craftybay/ui/state_managers/home_controller.dart';
-import 'package:craftybay/ui/state_managers/product_by_remark_controller.dart';
+import 'package:craftybay/ui/state_managers/popular_product_by_remark_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -13,6 +13,8 @@ import '../../widgets/homewidgets/home_carouselslider_widget.dart';
 import '../../widgets/homewidgets/remarks_title_widget.dart';
 import '../../widgets/homewidgets/search_textfield_widget.dart';
 import '../../widgets/product_cart_widget.dart';
+import '../state_managers/new_product_by_remark_controller.dart';
+import '../state_managers/special_product_by_remark_controller.dart';
 import 'completed_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -118,8 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 remarkTitleText: "Popular",
                 onTap: () {},
               ),
-
-              ///
               GetBuilder<PopularProductController>(
                   builder: (productByRemarkController) {
                 if (productByRemarkController
@@ -151,12 +151,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 remarkTitleText: "Special",
                 onTap: () {},
               ),
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [],
-                ),
-              ),
+              GetBuilder<SpecialProductController>(
+                  builder: (specialproductcontroller) {
+                if (specialproductcontroller.specialProductInProgress) {
+                  return const SizedBox(
+                    height: 90,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      children: specialproductcontroller.specialProduct.product!
+                          .map(
+                            (products) => ProductCardWidget(
+                              product: products,
+                            ),
+                          )
+                          .toList()),
+                );
+              }),
               const SizedBox(
                 height: 16,
               ),
@@ -164,17 +180,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 remarkTitleText: "New",
                 onTap: () {},
               ),
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                    // ProductCardWidget(),
-                  ],
-                ),
-              )
+              GetBuilder<NewProductController>(builder: (newproductcontroller) {
+                if (newproductcontroller.newProductControllerInProgress) {
+                  return const SizedBox(
+                    height: 90,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      children: newproductcontroller.newProductModel.product!
+                          .map(
+                            (products) => ProductCardWidget(
+                              product: products,
+                            ),
+                          )
+                          .toList()),
+                );
+              }),
             ],
           ),
         ),

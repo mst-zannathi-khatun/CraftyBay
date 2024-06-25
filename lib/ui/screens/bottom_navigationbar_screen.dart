@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/appcolors.dart';
 import '../state_managers/home_controller.dart';
-import '../state_managers/product_by_remark_controller.dart';
+import '../state_managers/popular_product_by_remark_controller.dart';
+import '../state_managers/new_product_by_remark_controller.dart';
+import '../state_managers/special_product_by_remark_controller.dart';
 import 'cart_screen.dart';
 import 'category_screen.dart';
 import 'home_screen.dart';
@@ -34,6 +36,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     Get.find<HomeController>().getHomeSlider();
     Get.find<CategoryController>().getCategory();
     Get.find<PopularProductController>().getPopularProductsByRemark();
+    Get.find<NewProductController>().getNewProducts();
+    Get.find<SpecialProductController>().getSpecialProduct();
   }
 
   int selectedIndex = 0;

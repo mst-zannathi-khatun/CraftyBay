@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 
 class PopularProductController extends GetxController {
   bool _getProductByRemarkModelInProgress = false;
-  PopularProductModel _popularProduct = PopularProductModel();
+  ProductByRemarkModel _popularProduct = ProductByRemarkModel();
 
   bool get getProductByRemarkModelInProgress =>
       _getProductByRemarkModelInProgress;
 
-  PopularProductModel get popularProduct => _popularProduct;
+  ProductByRemarkModel get popularProduct => _popularProduct;
 
   Future<bool> getPopularProductsByRemark() async {
     _getProductByRemarkModelInProgress = true;
@@ -18,7 +18,7 @@ class PopularProductController extends GetxController {
         await NetworkCaller.getRequest(url: '/ListProductByRemark/popular');
     _getProductByRemarkModelInProgress = false;
     if (response.isSuccess) {
-      _popularProduct = PopularProductModel.fromJson(response.returnData);
+      _popularProduct = ProductByRemarkModel.fromJson(response.returnData);
       update();
       return true;
     } else {
