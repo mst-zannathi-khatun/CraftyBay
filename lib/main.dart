@@ -11,6 +11,7 @@ import 'package:craftybay/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'ui/screens/splash_screen.dart';
+import 'ui/state_managers/product_detailsbyid_controller.dart';
 import 'ui/state_managers/special_product_by_remark_controller.dart';
 
 void main() {
@@ -61,5 +62,6 @@ class GetXBindings extends Bindings {
     Get.put(NewProductController());
     Get.put(SpecialProductController());
     Get.put(ProductController());
+    Get.put(ProductDetailsByIDController());
   }
 }

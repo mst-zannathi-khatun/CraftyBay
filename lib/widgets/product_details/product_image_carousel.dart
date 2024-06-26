@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import '../../utils/appcolors.dart';
 
 class ProductImageCarousel extends StatelessWidget {
-  ValueNotifier<int> currentCarouselIndex = ValueNotifier(0);
+  final List<String> images;
 
   ProductImageCarousel({
     super.key,
+    required this.images,
   });
+
+  ValueNotifier<int> currentCarouselIndex = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +26,16 @@ class ProductImageCarousel extends StatelessWidget {
               onPageChanged: (index, _) {
                 currentCarouselIndex.value = index;
               }),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: images.map((imageUrl) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
-                        color: primaryColor,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ));
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: primaryColor,
+                      image: DecorationImage(image: NetworkImage(imageUrl))),
+                  alignment: Alignment.center,
+                );
               },
             );
           }).toList(),
@@ -51,7 +51,7 @@ class ProductImageCarousel extends StatelessWidget {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        for (int i = 0; i < 5; i++)
+                        for (int i = 0; i <images.length; i++)
                           Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Container(
