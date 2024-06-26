@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'ui/screens/splash_screen.dart';
 import 'ui/state_managers/product_detailsbyid_controller.dart';
 import 'ui/state_managers/special_product_by_remark_controller.dart';
+import 'ui/state_managers/wish_list_controller.dart';
 
 void main() {
   runApp(const CraftyBay());
@@ -63,5 +64,6 @@ class GetXBindings extends Bindings {
     Get.put(SpecialProductController());
     Get.put(ProductController());
     Get.put(ProductDetailsByIDController());
+    Get.put(WishListController());
   }
 }

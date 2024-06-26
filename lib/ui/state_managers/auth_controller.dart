@@ -27,7 +27,6 @@ class AuthController extends GetxController {
   Future<void> saveProfileData(ProfileData profile) async {
     SharedPreferences preference = await SharedPreferences.getInstance();
     _profileData = profile;
-    // Convert profile to JSON string and save it
     await preference.setString('user_profile', jsonEncode(profile.toJson()));
   }
 
@@ -38,27 +37,9 @@ class AuthController extends GetxController {
 
   Future<void> getProfileData() async {
     SharedPreferences preference = await SharedPreferences.getInstance();
-    String? jsonString = preference.getString('user_profile');
-
-    // Log the JSON string for debugging
-    print("Retrieved JSON string: $jsonString");
-
-    if (jsonString != null && jsonString.isNotEmpty) {
-      try {
-        // Parse the JSON string into a Map
-        Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-
-        // Convert the JSON Map into a ProfileData object
-        _profileData = ProfileData.fromJson(jsonMap);
-      } catch (e) {
-        print("Error parsing JSON: $e");
-        // Handle or log the error appropriately
-      }
-    } else {
-      // Handle the case where there is no profile data
-      print("No profile data found.");
-      _profileData = null;
-    }
+    _profileData = ProfileData.fromJson(
+      jsonDecode(preference.getString('user_profile') ?? '{}'),
+    );
   }
 
   Future<void> clearUserData() async {

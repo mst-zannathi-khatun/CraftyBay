@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:craftybay/data/models/response_model.dart';
 import 'package:craftybay/data/utils/urls.dart';
+import 'package:craftybay/ui/screens/email_address_verification_screen.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:http/http.dart';

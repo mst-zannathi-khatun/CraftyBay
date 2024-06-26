@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:craftybay/ui/screens/home_screen.dart';
+import 'package:craftybay/ui/screens/bottom_navigationbar_screen.dart';
 import 'package:craftybay/ui/state_managers/user_auth_controller.dart';
 import 'package:craftybay/utils/appcolors.dart';
 import 'package:craftybay/widgets/common_elevatedbutton_widget.dart';
@@ -99,7 +99,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                             await userAuthController.otpVerification(
                                 widget.email, _otpETController.text);
                         if (response) {
-                          Get.offAll(const HomeScreen());
+                          Get.offAll(const BottomNavigationBarScreen());
                         } else {
                           Get.showSnackbar(const GetSnackBar(
                             title: "Otp Verification Failed",

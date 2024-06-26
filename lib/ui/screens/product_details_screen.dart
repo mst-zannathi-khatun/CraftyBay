@@ -1,4 +1,5 @@
 import 'package:craftybay/ui/state_managers/product_detailsbyid_controller.dart';
+import 'package:craftybay/ui/state_managers/wish_list_controller.dart';
 import 'package:craftybay/utils/style.dart';
 import 'package:craftybay/widgets/common_elevatedbutton_widget.dart';
 import 'package:flutter/material.dart';
@@ -114,21 +115,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: primaryColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(4),
-                                            child: Icon(
-                                              Icons.favorite_border,
-                                              size: 11,
-                                              color: Colors.white,
+                                        GetBuilder<WishListController>(
+                                            builder: (wishlistcontroller) {
+                                          if (wishlistcontroller
+                                              .addNewInProgress) {
+                                            return const CircularProgressIndicator();
+                                          }
+                                          return InkWell(
+                                            onTap: () {
+                                              Get.find<WishListController>()
+                                                  .addToWishlist(productDetails
+                                                      .productId!);
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: primaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: const Padding(
+                                                padding: EdgeInsets.all(4),
+                                                child: Icon(
+                                                  Icons.favorite_border,
+                                                  size: 11,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        )
+                                          );
+                                        })
                                       ],
                                     ),
                                   ],
