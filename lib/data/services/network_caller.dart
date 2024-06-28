@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:craftybay/data/models/response_model.dart';
 import 'package:craftybay/data/utils/urls.dart';
-import 'package:craftybay/ui/screens/email_address_verification_screen.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:http/http.dart';
@@ -41,14 +39,20 @@ class NetworkCaller {
     }
   }
 
-  static Future<ResponseModel> postRequest({required String url}) async {
+  static Future<ResponseModel> postRequest({
+    required String url,
+    Map<String, dynamic>? body,
+  }) async {
     try {
-      final http.Response response =
-          await post(Uri.parse(Urls.baseUrls + url), headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'token': AuthController.token.toString(),
-      });
+      final http.Response response = await post(
+        Uri.parse(Urls.baseUrls + url),
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          'token': AuthController.token.toString(),
+        },
+        body: jsonEncode(body),
+      );
       log(response.body);
       if (response.statusCode == 200) {
         return ResponseModel(

@@ -6,7 +6,6 @@ import '../../utils/appcolors.dart';
 import '../state_managers/home_controller.dart';
 import '../state_managers/popular_product_by_remark_controller.dart';
 import '../state_managers/new_product_by_remark_controller.dart';
-import '../state_managers/product_controller.dart';
 import '../state_managers/special_product_by_remark_controller.dart';
 import 'cart_screen.dart';
 import 'category_screen.dart';

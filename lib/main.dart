@@ -1,5 +1,7 @@
+import 'package:craftybay/ui/screens/splash_screen.dart';
 import 'package:craftybay/ui/state_managers/auth_controller.dart';
 import 'package:craftybay/ui/state_managers/bottom_navigation_bar_controller.dart';
+import 'package:craftybay/ui/state_managers/cart_controller.dart';
 import 'package:craftybay/ui/state_managers/categorys_controller.dart';
 import 'package:craftybay/ui/state_managers/home_controller.dart';
 import 'package:craftybay/ui/state_managers/popular_product_by_remark_controller.dart';
@@ -10,7 +12,6 @@ import 'package:craftybay/ui/state_managers/user_profile_controller.dart';
 import 'package:craftybay/utils/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'ui/screens/splash_screen.dart';
 import 'ui/state_managers/product_detailsbyid_controller.dart';
 import 'ui/state_managers/special_product_by_remark_controller.dart';
 import 'ui/state_managers/wish_list_controller.dart';
@@ -65,5 +66,6 @@ class GetXBindings extends Bindings {
     Get.put(ProductController());
     Get.put(ProductDetailsByIDController());
     Get.put(WishListController());
+    Get.put(CartController());
   }
 }

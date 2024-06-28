@@ -1,3 +1,4 @@
+import 'package:craftybay/data/services/network_caller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,8 @@ class _CompletedProfileScreenState extends State<CompletedProfileScreen> {
   final TextEditingController _lastNameETController = TextEditingController();
   final TextEditingController _mobileNameETController = TextEditingController();
   final TextEditingController _cityNameETController = TextEditingController();
-  final TextEditingController _shippingNameETController = TextEditingController();
+  final TextEditingController _shippingNameETController =
+      TextEditingController();
   final GlobalKey<FormState> _fromKey = GlobalKey<FormState>();
 
   @override
@@ -119,7 +121,32 @@ class _CompletedProfileScreenState extends State<CompletedProfileScreen> {
                   CommonElevatedButtonWidget(
                     title: "Complete",
                     onTap: () async {
-                      if (_fromKey.currentState!.validate()) {}
+                      if (_fromKey.currentState!.validate()) {
+                        final result = await NetworkCaller.postRequest(
+                          url: '/CreateProfile',
+                          body: {
+                            "firstName": _firstNameETController.text.trim(),
+                            "lastName": _lastNameETController.text.trim(),
+                            "mobile": _mobileNameETController.text.trim(),
+                            "city": _cityNameETController.text.trim(),
+                            "shippingAddress":
+                                _shippingNameETController.text.trim(),
+                          },
+                        );
+                        print(result);
+                        if (result.isSuccess) {
+                          _firstNameETController.clear();
+                          _lastNameETController.clear();
+                          _mobileNameETController.clear();
+                          _cityNameETController.clear();
+                          _shippingNameETController.clear();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Success")));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Fail")));
+                        }
+                      }
                     },
                   ),
                 ],
